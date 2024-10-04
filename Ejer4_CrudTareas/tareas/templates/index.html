@@ -10,6 +10,7 @@
     <form id="tarea-form">
         <input type="text" id="nombre" placeholder="Nombre de la tarea" required>
         <input type="text" id="descripcion" placeholder="Descripción de la tarea" required>
+        <input type="date" id="fecha_creacion" placeholder="Fecha de creación" required>
         <select id="estado" required>
             <option value="true">Completada</option>
             <option value="false">No completada</option>
@@ -32,6 +33,21 @@
                         const li = document.createElement('li');
                         li.textContent = `${tarea.nombre}: ${tarea.descripcion}`;
                         tareasList.appendChild(li);
+                        // boton para eliminar tarea
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Eliminar';
+                        deleteButton.addEventListener('click', () => {
+                            deleteTarea(tarea.id);
+                        });
+                        li.appendChild(deleteButton);
+
+                        // boton para actualizar tarea
+                        const updateButton = document.createElement('button');
+                        updateButton.textContent = 'Editar';
+                        updateButton.addEventListener('click', () => {
+                            updateTarea(tarea.id);
+                        });
+                        li.appendChild(updateButton);
                     });
                 });
         }
@@ -41,14 +57,22 @@
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const descripcion = document.getElementById('descripcion').value;
-            const estado = document.getElementById('estado').value === 'true'; // Convierte a booleano
+            const fecha_creacion = document.getElementById('fecha_creacion').value
+            const estado = document.getElementById('estado').value === 'true'; 
+
+            console.log({nombre, descripcion, fecha_creacion, estado});
 
             fetch('http://127.0.0.1:8000/api/tareas/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nombre, descripcion, fecha_creacion: new Date(), estado })
+                body: JSON.stringify({
+                    nombre: nombre,
+                    descripcion: descripcion,
+                    fecha_creacion: fecha_creacion,
+                    estado: estado
+                }),
             })
             .then(response => {
                 if (response.ok) {
@@ -71,6 +95,54 @@
 
         // Cargar tareas al iniciar
         loadTareas();
+
+        // Función para eliminar tarea
+        function deleteTarea(id) {
+            fetch(`http://127.0.0.1:8000/api/tareas/${id}/`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Si la respuesta es exitosa, mostramos la alerta
+                    alert('Tarea eliminada con éxito!');
+                    loadTareas();
+                } else {
+                    throw new Error('Error al eliminar la tarea');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('No se pudo eliminar la tarea. Inténtalo de nuevo.');
+            });
+        }
+
+
+        // Función para actualizar tarea
+        function updateTarea(id) {
+            fetch(`http://127.0.0.1:8000/api/tareas/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    estado: true
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Si la respuesta es exitosa, mostramos la alerta
+                    alert('Tarea actualizada con éxito!');
+                    loadTareas();
+                } else {
+                    throw new Error('Error al actualizar la tarea');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('No se pudo actualizar la tarea. Inténtalo de nuevo.');
+            });
+        }
+
     </script>
 </body>
 </html>
