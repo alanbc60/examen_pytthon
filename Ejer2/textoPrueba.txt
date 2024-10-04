@@ -1,0 +1,5 @@
+El rápido zorro marrón salta sobre el perro perezoso. Esta frase se usa a menudo para probar fuentes y distribuciones de 
+teclado porque contiene todas las letras del alfabeto español. Sin embargo, no es la única frase que puede lograr esto. 
+Existen muchas otras, pero esta es la más popular.
+Python es un lenguaje de programación versátil, conocido por su simplicidad y legibilidad. Se utiliza en varios 
+campos como el desarrollo web, la ciencia de datos, la inteligencia artificial y la automatización.

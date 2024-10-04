@@ -1,0 +1,104 @@
+¿Qué es Django y por qué se usa?*
+Django es un framework web de Python de alto nivel que se emplea para el desarrollo  de sitios web seguros de manera 
+rapida y eficiente. Está específicamente diseñado para fomentar un desarrollo rápido con un diseño limpio y práctico.  
+Se utiliza por su enfoque en la simplicidad, la escalabilidad y la seguridad, proporcionando herramientas integradas para 
+la gestión de bases de datos, la autenticación de usuarios, y el enrutamiento de URL, entre otros.
+
+
+*Explica brevemente el patrón MVC (Modelo-Vista-Controlador) y cómo se implementa en Django.*
+
+El patron MVC permite separar los componentes de nuestra aplicación dependiendo de la responsabilidad que tienen, esto significa que cuando hacemos un cambio en alguna parte de nuestro código, esto no afecte otra parte del mismo.
+Separa la aplicación en tres componentes:
+
+Modelo: Representa la lógica de datos y la base de datos.
+Vista: Son la representación visual de los datos, representa la interfaz de usuario.
+Controlador: Recibe las órdenes del usuario y se encarga de solicitar los datos al modelo y de comunicárselos a la vista. 
+
+En Django, se utiliza una variante llamada MTV (Modelo-Template-Vista):
+
+Modelo: Define la estructura de los datos (equivale al Modelo).
+Template: Se encarga de la presentación (equivale a la Vista).
+Vista: Controla la lógica de negocio y las interacciones (equivale al Controlador).
+
+*qué es un modelo en Django y cómo se define?* 
+
+Son una representación de base de datos en Python. Son una forma única y poderosa de interactuar con su base de datos, 
+utilizando un código SQL mínimo y al mismo tiempo proporcionan un alto nivel de abstracción para manipular sus datos.
+ Se define creando una clase que hereda de django.db.models.Model y declarando los atributos de la clase.
+
+2. Qué es un diccionario en Python y cómo se diferencia de una lista*
+
+Es una colección de pares clave-valor, las claves son unicas y deben ser immutables (como cadenas, numeros enteros, tuplas), se accede a los valores mediate si clave.
+
+Diferencia de una lista: 
+Indice vs clave:
+En una lista, se accede a los elementos, mientras que en un diccionario, se accede a los valores mediante su clave.
+
+Orden: las listas mantienen el orden de los elementos, mientras que los.diccionarios no tienen un prden especifico
+Claves unicas: en un diccionario, las claves deben ser unicas, mientras que en una lista, no hay restrictions sobre la 
+unicidad de los elementos 
+
+*Explica la diferencia entre append() y extend() en una lista de Python.*
+
+Append es un método que tiene toda lista de Python el cual permite agregar un elemento al final de la lista. 
+No retorna ningún elemento ni valor, además, acepta cualquier tipo de valor como elemento a agregar: número, cadena, lista, diccionario, objeto, etc.
+
+El método extend() permite agregar todos los elementos de un iterable(lista, tupla, cadena, etc) al final de una lista, 
+lo que permite unir 2 listas.
+
+*Qué es un decorador en Python? Proporciona un ejemplo simple*
+
+Un decorador es una función que modifica o envuelve otra función. Se usa comúnmente para agregar funcionalidad. 
+Un ejemplo simple es:
+
+def decorador(func):
+    def envoltura():
+        print("Antes de llamar a la función")
+        func()
+        print("Después de llamar a la función")
+    return envoltura
+
+@decorador
+def saludar():
+    print("Hola!")
+
+saludar()  # Imprime mensajes antes
+
+3. ¿Qué es una base de datos relacional?*
+
+es una colección de información que organiza los datos en relaciones predefinidas donde los datos se almacenan en 
+una o más tablas (o "relaciones") de columnas y filas.
+Utiliza un lenguaje estructurado de consulta (SQL) para acceder y manipular los datos.
+
+*Explica la diferencia entre una clave primaria y una clave foránea.*
+
+Clave primaria: Es un campo o conjunto de campos que identifica de manera única cada registro en una tabla.
+
+Clave foránea: Es un campo que establece una relación entre dos tablas, apuntando a la clave primaria de otra tabla, 
+garantizando la integridad referencial.
+
+¿Cómo se realiza una consulta SELECT básica en MySQL?*
+
+Una consulta SELECT básica se realiza con la siguiente sintaxis:
+
+
+SELECT columna1, columna2 FROM nombre_tabla WHERE condición;
+
+*4.¿Qué es una API y para qué se utiliza?*Las API (Interfaz de Programación de Aplicaciones) funcionan 
+como un intermediario de software, lo que permite que dos aplicaciones se comuniquen entre sí.
+
+*Explica brevemente la diferencia entre una API REST y una API SOAP.*
+
+API REST (Representational State Transfer): Utiliza HTTP y se basa en recursos, utilizando métodos 
+como GET, POST, PUT, DELETE. Es más ligera y fácil de usar.
+
+API SOAP (Simple Object Access Protocol): Utiliza XML para transmitir mensajes y es más rígida y compleja, con 
+un enfoque en la seguridad y la transacción.
+
+¿Qué son los métodos HTTP comunes utilizados en una API REST?*
+Los métodos HTTP comunes en una API REST incluyen:
+
+GET: Recupera datos.
+POST: Envía datos para crear un nuevo recurso.
+PUT: Actualiza un recurso existente.
+DELETE: Elimina un recurso.

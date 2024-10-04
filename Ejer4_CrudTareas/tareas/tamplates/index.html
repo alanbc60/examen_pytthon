@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Tareas</title>
+</head>
+<body>
+    <h1>Lista de Tareas</h1>
+    <form id="tarea-form">
+        <input type="text" id="nombre" placeholder="Nombre de la tarea" required>
+        <input type="text" id="descripcion" placeholder="Descripción de la tarea" required>
+        <button type="submit">Agregar Tarea</button>
+    </form>
+    <ul id="tareas-list"></ul>
+
+    <script>
+        const form = document.getElementById('tarea-form');
+        const tareasList = document.getElementById('tareas-list');
+
+        // Función para cargar tareas
+        function loadTareas() {
+            fetch('http://127.0.0.1:8000/api/tareas/')
+                .then(response => response.json())
+                .then(data => {
+                    tareasList.innerHTML = '';
+                    data.forEach(tarea => {
+                        const li = document.createElement('li');
+                        li.textContent = `${tarea.nombre}: ${tarea.descripcion}`;
+                        tareasList.appendChild(li);
+                    });
+                });
+        }
+
+        // Función para agregar tarea
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const descripcion = document.getElementById('descripcion').value;
+
+            fetch('http://127.0.0.1:8000/api/tareas/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre, descripcion })
+            })
+            .then(response => response.json())
+            .then(() => {
+                loadTareas();
+                form.reset();
+            });
+        });
+
+        // Cargar tareas al iniciar
+        loadTareas();
+    </script>
+</body>
+</html>

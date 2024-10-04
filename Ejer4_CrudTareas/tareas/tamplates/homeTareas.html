@@ -1,0 +1,26 @@
+<!-- templates/tareas/listar_tareas.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <h1>Tareas</h1>
+    <a href="{% url 'crear_tarea' %}">Crear nueva tarea</a>
+    <ul>
+        {% for tarea in tareas %}
+            <li>
+                {{ tarea.titulo }} - {% if tarea.completada %}Completada{% else %}No completada{% endif %}
+                <a href="{% url 'actualizar_tarea' tarea.id %}">Editar</a>
+                <form action="{% url 'eliminar_tarea' tarea.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="submit" value="Eliminar">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

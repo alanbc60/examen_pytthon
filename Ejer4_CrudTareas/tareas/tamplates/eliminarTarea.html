@@ -1,0 +1,19 @@
+<!-- templates/tareas/eliminar_tarea.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Tarea</title>
+</head>
+<body>
+    <h1>Eliminar Tarea</h1>
+    <p>¿Estás seguro de que deseas eliminar la tarea "{{ tarea.titulo }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar">
+    </form>
+    <a href="{% url 'listar_tareas' %}">Cancelar</a>
+</body>
+</html>
