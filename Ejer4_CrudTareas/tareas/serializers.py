@@ -2,9 +2,9 @@
 # Crea un archivo serializers.py en la carpeta tareas:
 
 from rest_framework import serializers
-from .models import Tarea  # Asegúrate de que este modelo exista
+from .models import Tarea  # Asegúrate de que esté importado correctamente
 
 class TareaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tarea  # Indica el modelo que estás serializando
-        fields = '__all__'  # O especifica los campos que deseas incluir
+        model = Tarea
+        fields = ['id', 'nombre', 'descripcion', 'fecha_creacion', 'estado']

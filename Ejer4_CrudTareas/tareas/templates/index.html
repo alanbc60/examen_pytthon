@@ -10,6 +10,10 @@
     <form id="tarea-form">
         <input type="text" id="nombre" placeholder="Nombre de la tarea" required>
         <input type="text" id="descripcion" placeholder="Descripción de la tarea" required>
+        <select id="estado" required>
+            <option value="true">Completada</option>
+            <option value="false">No completada</option>
+        </select>
         <button type="submit">Agregar Tarea</button>
     </form>
     <ul id="tareas-list"></ul>
@@ -37,18 +41,31 @@
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const descripcion = document.getElementById('descripcion').value;
+            const estado = document.getElementById('estado').value === 'true'; // Convierte a booleano
 
             fetch('http://127.0.0.1:8000/api/tareas/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nombre, descripcion })
+                body: JSON.stringify({ nombre, descripcion, fecha_creacion: new Date(), estado })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    // Si la respuesta es exitosa, mostramos la alerta
+                    alert('Tarea agregada con éxito!');
+                    return response.json();
+                } else {
+                    throw new Error('Error al agregar la tarea');
+                }
+            })
             .then(() => {
                 loadTareas();
                 form.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('No se pudo agregar la tarea. Inténtalo de nuevo.');
             });
         });
 

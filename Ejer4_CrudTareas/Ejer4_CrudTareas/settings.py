@@ -69,16 +69,13 @@ WSGI_APPLICATION = 'Ejer4_CrudTareas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tareasBD',
+        'NAME': 'tareas_bd',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',  # o la dirección de tu servidor
-        'PORT': '3307',  # El puerto predeterminado para MySQL
+        'HOST': 'localhost',  
+        'PORT': '3306',  # El puerto predeterminado para MySQL
     }
 }
-
-import pymysql
-pymysql.install_as_MySQLdb()
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

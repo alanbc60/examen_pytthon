@@ -6,7 +6,7 @@ from django.db import models
 class Tarea(models.Model):
     nombre = models.CharField(max_length=100)
     fecha_creacion = models.DateField()
-    descipcion = models.TextField()
+    descripcion = models.TextField()
     estado = models.BooleanField(default=False)
 
     def __str__(self):
